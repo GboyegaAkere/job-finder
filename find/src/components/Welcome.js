@@ -1,10 +1,14 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
+
+const jobTypes = ['Full-Time', 'Part-Time', "Freelance", "Contractor",]
+
 const Welcome = () => {
     const navigation = useNavigation()
+    const [activeJobType, setActiveJobtype] = React.useState("Full-time")
   return (
     <View>
       <View className="px-4 mt-2 ">
@@ -21,13 +25,34 @@ const Welcome = () => {
         </View>
 
         <View className="mb-2">
-            <View className="bg-blue-300 h-12 rounded pt-2">
+            <TouchableOpacity className="bg-blue-300 h-12 rounded-full pt-2">
              <Ionicons name='search-outline' size={30} />
-            </View>
+            </TouchableOpacity>
         </View>
-
-        
       </View>
+
+
+      <View className="mt-3 px-2">
+          <FlatList
+           data={jobTypes}
+           renderItem={({item})=>{
+            return(
+              <TouchableOpacity 
+              className="m-1 bg-white rounded-full h-9 border-4 border-stone-950"
+               onPress={()=>{ 
+                setActiveJobtype(item)
+                navigation.navigate("Search")}}
+              >
+                <Text className="px-2 pt-1">{item}</Text>
+              </TouchableOpacity>
+            )
+           }}
+           keyExtractor={item=>item}
+           contentContainerStyle ={{columnGap:3}}
+           horizontal
+           showsHorizontalScrollIndicator="false"
+          />
+        </View>
     </View>
   )
 }

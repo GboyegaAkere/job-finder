@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './screens/HomeScreen'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { TouchableOpacity, View } from 'react-native'
+import Search from './components/Search'
+import JobDetails from './components/JobDetails'
 
 
 const Stack = createNativeStackNavigator()
@@ -13,6 +15,7 @@ const AppNavigator = () => {
   
    <NavigationContainer>
       <Stack.Navigator> 
+     
         <Stack.Screen name='Home' component={HomeScreen}
          options={
           {headerStyle:{backgroundColor:"white"},
@@ -34,6 +37,11 @@ const AppNavigator = () => {
            }
         }}
          />
+         <Stack.Screen name='Search' component={Search}/>
+         <Stack.Screen name='Details' component={JobDetails} options={{
+        headerStyle:{backgroundColor:'yellow'}
+      }}/>
+        
       </Stack.Navigator>
    </NavigationContainer>
   )
